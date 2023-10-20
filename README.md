@@ -4,11 +4,17 @@ Jodo provides a single CLI interface to interact with multiple cloud providers.
 
 ## Installation
 
-While it can be `pip install`ed into any environment, [pipx](https://pypa.github.io/pipx/) is recommended:
+Jodo can be `pip install`ed into any environment, but [pipx](https://pypa.github.io/pipx/) is recommended:
 
 ```bash
 pipx install jodo
 ```
+
+Also currently requires https://github.com/canonical/pycloudlib/pull/324
+
+## Configuration
+
+Pycloudlib must be configured as described in the [pycloudlib documentation](https://pycloudlib.readthedocs.io/en/latest/configuration.html).
 
 ## Usage
 
@@ -67,6 +73,43 @@ See "man sudo_root" for details.
 ubuntu@my-instance-0:~$
 ```
 
+### Execute a command on instance
+
+```bash
+$ jodo exec my-instance "cat /etc/lsb-release"
+return code: 0
+stdout:
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.3 LTS"
+$
+```
+
+### Push a file
+
+```bash
+$ echo 'hi' > /tmp/hi
+$ jodo push my-instance /tmp/hi /var/tmp/hi
+$ jodo exec my-instance "cat /var/tmp/hi"
+return code: 0
+stdout:
+hi
+$
+```
+
+### Pull a file
+
+```bash
+$ jodo pull my-instance /etc/lsb-release /tmp/remote-lsb
+$ cat /tmp/remote-lsb
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=22.04
+DISTRIB_CODENAME=jammy
+DISTRIB_DESCRIPTION="Ubuntu 22.04.3 LTS"
+$
+```
+
 ### Delete instance
 
 ```bash
@@ -75,4 +118,4 @@ jodo delete my-instance
 
 ## Status
 
-This is a project I quickly hacked together in my free time and should be considered minimum viable functionality. It currently has no testing, no logging, no exception handling, no documentation (other than this README), and no guantees about state or schema compatibility. If you use it you will see glaringly obvious bugs. Feel free to submit an issue or PR.
+This is a project I quickly hacked together in my free time and should be considered minimum viable functionality. It currently has no testing, no logging, no exception handling, no documentation (other than this README), and no guarantees about state or schema compatibility. If you use it you will see glaringly obvious bugs. Feel free to submit an issue or PR.

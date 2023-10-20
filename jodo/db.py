@@ -48,7 +48,7 @@ class InstanceInfo(NamedTuple):
     created: str
 
 
-def create_instance(instance: BaseInstance, cloud: str, name: str) -> None:
+def create_info(instance: BaseInstance, cloud: str, name: str) -> None:
     """Add newly launched instance to database."""
     cursor.execute(
         "INSERT INTO instance (id, name, cloud, ip, created) VALUES "
@@ -64,7 +64,7 @@ def list_instances() -> list[InstanceInfo]:
     return [InstanceInfo(*i) for i in cursor.fetchall()]
 
 
-def get_instance(name: str) -> InstanceInfo:
+def get_info(name: str) -> InstanceInfo:
     """Get instance from database."""
     result: list[tuple] = cursor.execute(
         "SELECT id, name, cloud, ip, created FROM instance WHERE name=?",
@@ -76,7 +76,7 @@ def get_instance(name: str) -> InstanceInfo:
     return InstanceInfo(*result[0])
 
 
-def delete_instance(name: str) -> None:
+def delete_info(name: str) -> None:
     """Delete instance from database."""
     result = cursor.execute("Delete from instance")
     connection.commit()
