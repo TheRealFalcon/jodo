@@ -8,12 +8,12 @@ authors = [{ name = "James Falcon", email = "therealfalcon@gmail.com" }]
 license = { file = "LICENSE" }
 classifiers = ["License :: OSI Approved :: Apache Software License"]
 description = "One CLI to rule them all"
-version = "0.2.0"
+version = "0.3.1"
 requires-python = ">=3.10"
 dependencies = ["pycloudlib~=1!5.0"]
 
 [project.optional-dependencies]
-test = ["ruff"]
+test = ["pytest", "ruff"]
 
 [project.scripts]
 jodo = "jodo.main:main"
@@ -73,4 +73,8 @@ select = [
 ignore = [
     "ANN101", # Missing type annotation for self in method
     "ANN204", # missing-return-type-special-method
+    "EM101",  # raw-string-in-exception
+    "S101",   # Use of assert
+    "S603",   # subprocess-without-shell-equals-true
+    "S607",   # start-process-with-partial-path
 ]

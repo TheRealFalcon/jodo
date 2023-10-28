@@ -10,8 +10,6 @@ Jodo can be `pip install`ed into any environment, but [pipx](https://pypa.github
 pipx install jodo
 ```
 
-Also currently requires https://github.com/canonical/pycloudlib/pull/324
-
 ## Configuration
 
 Pycloudlib must be configured as described in the [pycloudlib documentation](https://pycloudlib.readthedocs.io/en/latest/configuration.html).
@@ -118,4 +116,4 @@ jodo delete my-instance
 
 ## Status
 
-This is a project I quickly hacked together in my free time and should be considered minimum viable functionality. It currently has no testing, no logging, no exception handling, no documentation (other than this README), and no guarantees about state or schema compatibility. If you use it you will see glaringly obvious bugs. Feel free to submit an issue or PR.
+There is currently no logging, minimal exception handling, no documentation (other than this README), and no guarantees about state or schema compatibility. New versions may require you to delete `~/.config/jodo/jodo.db` in order to work correctly. You may see glaringly obvious bugs. Feel free to submit an issue or PR.
