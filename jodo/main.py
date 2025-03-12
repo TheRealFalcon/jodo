@@ -42,8 +42,9 @@ def launch(
     """Launch a new instance."""
     cloud_class = CLOUDS[cloud](tag=name, timestamp_suffix=False)
     try:
-        image_id = cloud_class.released_image(image)
-    except Exception:
+        image_id = cloud_class.daily_image(image)
+    except Exception as e:
+        print(e)
         image_id = image
     kwargs = {"image_id": image_id}
     if instance_type:
@@ -103,7 +104,12 @@ def ssh(name: str) -> None:
 
 def delete(name: str) -> None:
     """Delete an instance."""
-    instance = _get_instance(name)
+    try:
+        instance = _get_instance(name)
+    except Exception:  # Broad exception because cloud throw different errors
+        print(f"Could not find instance '{name}'. Does it exist?")
+        db.delete_info(name)
+        return
     exceptions = instance.delete()
     db.delete_info(name)
     if exceptions:
