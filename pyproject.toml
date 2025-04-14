@@ -8,9 +8,9 @@ authors = [{ name = "James Falcon", email = "therealfalcon@gmail.com" }]
 license = { file = "LICENSE" }
 classifiers = ["License :: OSI Approved :: Apache Software License"]
 description = "One CLI to rule them all"
-version = "0.3.2"
+version = "0.3.3"
 requires-python = ">=3.10"
-dependencies = ["pycloudlib~=1!5.0"]
+dependencies = ["pycloudlib~=1!10.10"]
 
 [project.optional-dependencies]
 test = ["pytest", "ruff"]
